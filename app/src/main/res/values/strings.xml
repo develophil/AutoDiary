@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AutoDiary</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_main">TestMain</string>
+    <string name="local_service_started">로컬서비스시작합니다.</string>
+    <string name="local_service_stopped">로컬서비스중지합니다.</string>
+    <string name="local_service_connected">로컬서비스연결됐네</string>
+    <string name="local_service_disconnected">로컬서비스중지됐네</string>
+    <string name="local_service_label">로컬서비스라벨입니다.</string>
+</resources>
