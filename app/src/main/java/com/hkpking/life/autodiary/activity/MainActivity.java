@@ -43,6 +43,10 @@ import com.hkpking.life.autodiary.service.LocalService;
  *
  * 3. onPause에서 GPS를 중지
  *   --> LocationManager 객체에 이벤트 해제
+ *
+ *
+ *
+ *   modified
  * */
 
 
