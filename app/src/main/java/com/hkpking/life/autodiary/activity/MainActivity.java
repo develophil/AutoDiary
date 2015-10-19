@@ -1,6 +1,7 @@
 package com.hkpking.life.autodiary.activity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -22,7 +23,9 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.hkpking.life.autodiary.R;
+import com.hkpking.life.autodiary.common.CommonDefines;
 import com.hkpking.life.autodiary.service.LocalService;
+import com.hkpking.life.autodiary.sqlite.ADSQLiteHandler;
 
 /**
  * Android 위치 정보
@@ -50,10 +53,12 @@ import com.hkpking.life.autodiary.service.LocalService;
  * */
 
 
-public class MainActivity extends FragmentActivity implements LocationListener {
+public class MainActivity extends FragmentActivity implements LocationListener, CommonDefines {
 
     TextView tv1 = null;
     TextView tv2 = null;
+    TextView tv3 = null;
+    TextView tv4 = null;
 
     //위치정보 객체
     LocationManager lm = null;
@@ -65,8 +70,67 @@ public class MainActivity extends FragmentActivity implements LocationListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        Log.i(TAG, "MainActivity onCreate >>>>>>>>>>>>>>");
+
+
+        // 데이터베이스 연동
+        ADSQLiteHandler handler = ADSQLiteHandler.open(getApplicationContext());
+/*
+        // 데이터 저장
+        handler.insert("홍길동", 20, "서울");
+        handler.insert("이순신", 44, "전라");
+        handler.close();
+
+        // 데이터 수정
+        handler.update("홍길동", 55);
+        handler.close();
+
+        // 데이터 삭제
+        handler.delete("이순신");
+        handler.close();
+*/
+
+        // 데이터 검색
+        Cursor cursor = handler.select("select * from ad_tb_loc010");
+        startManagingCursor(cursor);
+        while(cursor.moveToNext()) {
+            int _id = cursor.getInt(cursor.getColumnIndex("_id"));
+            int latitude = cursor.getInt(cursor.getColumnIndex("latitude"));
+            int longitude = cursor.getInt(cursor.getColumnIndex("longitude"));
+            String address = cursor.getString(cursor.getColumnIndex("address"));
+            String creation_timestamp = cursor.getString(cursor.getColumnIndex("creation_timestamp"));
+            Log.i(TAG, "latitude : "+latitude);
+            Log.i(TAG, "longitude : "+longitude);
+            Log.i(TAG, "address : "+address);
+            Log.i(TAG, "creation_timestamp : "+creation_timestamp);
+
+        }//end while
+
+        handler.close();
+
+
+
+
+
+
+
+
+
+
+
+
+
         tv1 = (TextView)findViewById(R.id.textView1);
         tv2 = (TextView)findViewById(R.id.textView2);
+        tv3 = (TextView)findViewById(R.id.textView3);
+        tv4 = (TextView)findViewById(R.id.textView4);
+
+
+        Toast.makeText(this, "시작합니다..", Toast.LENGTH_SHORT).show();
+
+
+        tv4.setText("example...");
 
         /**위치정보 객체를 생성한다.*/
         lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
@@ -95,6 +159,7 @@ public class MainActivity extends FragmentActivity implements LocationListener {
             }
         }// (end if)위치정보 검색 끝
 
+        tv3.setText("provider : "+provider);
         /**마지막으로  조회했던 위치 얻기*/
         Location location = lm.getLastKnownLocation(provider);
 
