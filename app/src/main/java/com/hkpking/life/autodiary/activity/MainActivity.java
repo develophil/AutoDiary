@@ -92,8 +92,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
 */
 
         // 데이터 검색
-        Cursor cursor = handler.select("select * from ad_tb_loc010");
-        startManagingCursor(cursor);
+        Cursor cursor = handler.select("ad_tb_loc010");
         while(cursor.moveToNext()) {
             int _id = cursor.getInt(cursor.getColumnIndex("_id"));
             int latitude = cursor.getInt(cursor.getColumnIndex("latitude"));
@@ -108,17 +107,6 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
         }//end while
 
         handler.close();
-
-
-
-
-
-
-
-
-
-
-
 
 
         tv1 = (TextView)findViewById(R.id.textView1);

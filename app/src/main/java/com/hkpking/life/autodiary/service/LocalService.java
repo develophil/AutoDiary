@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.hkpking.life.autodiary.R;
 import com.hkpking.life.autodiary.common.CommonDefines;
+import com.hkpking.life.autodiary.sqlite.ADSQLiteHandler;
 
 import java.util.List;
 import java.util.Locale;
@@ -52,9 +53,6 @@ public class LocalService extends Service implements CommonDefines {
         i++;
         Log.i(TAG, "i >>> "+i);
 
-
-
-
 //and in your main class(Activity), call this class as follows :
         double latitude = 0.0, longitude = 0.0;
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
@@ -79,6 +77,15 @@ public class LocalService extends Service implements CommonDefines {
 
                     Log.i(TAG, completeAddress);
 
+
+                    // 데이터베이스 연동
+                    ADSQLiteHandler handler = ADSQLiteHandler.open(getApplicationContext());
+
+                    // 데이터 저장
+                    handler.insert(latitude,longitude,address);
+                    handler.close();
+
+
                 }
             }
             catch (Exception e){
@@ -95,7 +102,7 @@ public class LocalService extends Service implements CommonDefines {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.i("LocalService", "Received start id " + startId + ": " + intent);
+        Log.i(TAG, "Received start id " + startId + ": " + intent);
         Log.i(TAG, "onStartCommand >>>>>>>>>>>>>>");
         // We want this service to continue running until it is explicitly
         // stopped, so return sticky.
@@ -113,7 +120,7 @@ public class LocalService extends Service implements CommonDefines {
 
         Thread myThread = new Thread(new Runnable() {
             public void run() {
-                while (i<2) {
+                while (i<10) {
                     try {
                         handler.sendMessage(handler.obtainMessage());
                         Thread.sleep(5000);
