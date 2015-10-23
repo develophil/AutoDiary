@@ -15,7 +15,7 @@ public class ADSQLiteHandler implements CommonDefines {
 	//초기화
 	public ADSQLiteHandler(Context ctx) {
 		Log.i(TAG, "ADSQLiteHandler 초기화 >>>>>>>>>>>>>>");
-		helper = new ADSQLiteOpenHelper(ctx, "adDatabase.sqlite", null, 1);
+		helper = new ADSQLiteOpenHelper(ctx, "adDatabase.sqlite", null, 2);
 	}
 	
 	//open

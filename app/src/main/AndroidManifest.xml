@@ -38,20 +38,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".service.LocalServiceActivities$Binding"
-            android:label="@string/title_activity_main">
-
-
+        <activity
+            android:name=".service.LocalServiceActivities$Binding"
+            android:label="@string/title_activity_main" >
         </activity>
-        <activity android:name=".service.LocalServiceActivities$Controller"
-            android:label="@string/title_activity_main"></activity>
+        <activity
+            android:name=".service.LocalServiceActivities$Controller"
+            android:label="@string/title_activity_main" />
 
         <service
-            android:enabled="true"
-            android:name=".service.LocalService">
+            android:name=".service.LocalService"
+            android:enabled="true" >
         </service>
-
     </application>
 
 </manifest>

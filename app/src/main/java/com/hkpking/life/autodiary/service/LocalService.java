@@ -82,7 +82,7 @@ public class LocalService extends Service implements CommonDefines {
                     ADSQLiteHandler handler = ADSQLiteHandler.open(getApplicationContext());
 
                     // 데이터 저장
-                    handler.insert(latitude,longitude,address);
+                    handler.insert(latitude,longitude,completeAddress);
                     handler.close();
 
 

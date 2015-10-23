@@ -24,7 +24,7 @@ public class ADSQLiteOpenHelper extends SQLiteOpenHelper implements CommonDefine
 				" latitude integer , " +
 				" longitude integer , " +
 				" address text , " +
-				" creation_timestamp text )";
+				" creation_timestamp datetime default current_timestamp )";
 
 		db.execSQL(sql1);
 	}//end onCreate()
