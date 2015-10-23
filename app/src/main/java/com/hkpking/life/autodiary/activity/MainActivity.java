@@ -118,7 +118,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
         Toast.makeText(this, "시작합니다..", Toast.LENGTH_SHORT).show();
 
 
-        tv4.setText("example...");
+        tv4.setText("세팅");
 
         /**위치정보 객체를 생성한다.*/
         lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
@@ -163,6 +163,38 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                 LocalService.class));
 
     }
+
+    public void mClick(View v) {
+        switch(v.getId()) {
+
+            case R.id.textView1 :
+                Toast.makeText(this, "textView1 click", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.textView2 :
+                Toast.makeText(this, "textView2 click", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.textView3 :
+                Toast.makeText(this, "textView3 click", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.textView4 :
+                Toast.makeText(this, "textView4 click", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+
+    /** 다른 화면으로 넘어갈 때, 일시정지 처리*/
+    @Override
+    public void onPause(){
+        //Activity LifrCycle 관련 메서드는 무조건 상위 메서드 호출 필요
+        super.onPause();
+
+        //위치정보 객체에 이벤트 해제
+        lm.removeUpdates(this);
+
+    }
     /** 이 화면이 불릴 때, 일시정지 해제 처리*/
     @Override
     public void onResume(){
@@ -172,16 +204,6 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
         //위치정보 객체에 이벤트 연결
         lm.requestLocationUpdates(provider, 500, 1, this);
     }
-    /** 다른 화면으로 넘어갈 때, 일시정지 처리*/
-    @Override
-    public void onPause(){
-        //Activity LifrCycle 관련 메서드는 무조건 상위 메서드 호출 필요
-        super.onPause();
-
-        //위치정보 객체에 이벤트 해제
-        lm.removeUpdates(this);
-    }
-
     /** 위치가 변했을 경우 호출된다.*/
     @Override
     public void onLocationChanged(Location location) {
